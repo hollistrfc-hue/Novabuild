@@ -99,6 +99,7 @@
         if (formWrapper && successEl) {
           formWrapper.style.display  = 'none';
           successEl.style.display    = 'block';
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       } catch {
         btn.textContent   = originalText;
