@@ -75,5 +75,37 @@
     animEls.forEach(el => observer.observe(el));
   }
 
+  /* ─── Form Handling ─── */
+  document.querySelectorAll('form[data-nova-form]').forEach(form => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const btn         = form.querySelector('[type="submit"]');
+      const formWrapper = form.closest('.form-wrapper');
+      const successEl   = form.closest('[data-form-wrap]')?.querySelector('.form-success');
+      const originalText = btn.textContent;
+
+      btn.textContent   = 'Sending…';
+      btn.disabled      = true;
+      btn.style.opacity = '0.75';
+
+      try {
+        await fetch('/', {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body:    new URLSearchParams(new FormData(form)).toString()
+        });
+
+        if (formWrapper && successEl) {
+          formWrapper.style.display  = 'none';
+          successEl.style.display    = 'block';
+        }
+      } catch {
+        btn.textContent   = originalText;
+        btn.disabled      = false;
+        btn.style.opacity = '1';
+      }
+    });
+  });
 
 })();

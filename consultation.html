@@ -62,16 +62,15 @@
         <div data-form-wrap style="max-width:720px;margin:0 auto;">
 
           <!-- Success State -->
-          <div class="form-success" style="display:none;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--r-xl);padding:64px 40px;">
-            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 20px;color:#10b981;">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-              <polyline points="22 4 12 14.01 9 11.01"/>
-            </svg>
-            <h3 style="text-align:center;margin-bottom:10px;">You're on the calendar!</h3>
-            <p class="body-md" style="text-align:center;max-width:400px;margin:0 auto;">
-              Hollis will reach out within 24 hours to confirm your consultation
-              time. Looking forward to talking with you.
-            </p>
+          <div class="form-success">
+            <div class="form-success-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+            <h3 class="form-success-headline">You're one step closer to something great.</h3>
+            <p class="form-success-sub">We received your message and we'll be in touch within 24 hours. In the meantime, feel free to look around.</p>
+            <a href="index.html" class="btn btn-primary">Back to Home</a>
           </div>
 
           <!-- Form -->
@@ -153,10 +152,6 @@
 
               <div class="form-submit-wrap">
                 <button type="submit" class="btn btn-primary btn-lg">Let's Connect</button>
-              </div>
-
-              <div id="consultation-success" style="display:none;margin-top:16px;padding:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;text-align:center;color:#166534;">
-                Thanks! We'll be in touch within 24 hours.
               </div>
 
             </form>
