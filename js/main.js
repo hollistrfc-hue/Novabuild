@@ -75,52 +75,5 @@
     animEls.forEach(el => observer.observe(el));
   }
 
-  /* ─── Form Handling ─── */
-  document.querySelectorAll('form[data-nova-form]').forEach(form => {
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const btn          = form.querySelector('[type="submit"]');
-      const successEl    = form.closest('[data-form-wrap]')?.querySelector('.form-success');
-      const originalText = btn.textContent;
-
-      // Loading state
-      btn.textContent  = 'Sending…';
-      btn.disabled     = true;
-      btn.style.opacity = '0.75';
-
-      // Simulate async send (replace with Formspree/Netlify/backend endpoint)
-      await new Promise(r => setTimeout(r, 1100));
-
-      if (successEl) {
-        form.style.display    = 'none';
-        successEl.style.display = 'block';
-      } else {
-        btn.textContent  = '✓ Message Sent!';
-        btn.style.background = '#10b981';
-        btn.style.borderColor = '#10b981';
-        btn.style.opacity = '1';
-
-        setTimeout(() => {
-          btn.textContent  = originalText;
-          btn.style.background = '';
-          btn.style.borderColor = '';
-          btn.disabled     = false;
-          form.reset();
-        }, 3200);
-        return;
-      }
-
-      // Reset after 6s so user can submit again
-      setTimeout(() => {
-        if (successEl) successEl.style.display = 'none';
-        form.style.display = '';
-        btn.textContent  = originalText;
-        btn.disabled     = false;
-        btn.style.opacity = '1';
-        form.reset();
-      }, 6000);
-    });
-  });
 
 })();
