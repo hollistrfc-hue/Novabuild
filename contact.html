@@ -104,7 +104,8 @@
 
           <div class="form-wrapper fade-up delay-1">
             <p class="eyebrow mb-4">Send a Message</p>
-            <form data-nova-form novalidate>
+            <form data-nova-form novalidate netlify name="contact" method="POST">
+              <input type="hidden" name="form-name" value="contact">
 
               <div class="form-group">
                 <label for="contactName">Your Name <span style="color:var(--gold);">*</span></label>
@@ -123,6 +124,10 @@
 
               <div class="form-submit-wrap">
                 <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message</button>
+              </div>
+
+              <div id="contact-success" style="display:none;margin-top:16px;padding:16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;text-align:center;color:#166534;">
+                Thanks! We'll be in touch within 24 hours.
               </div>
 
             </form>
