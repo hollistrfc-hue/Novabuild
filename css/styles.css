@@ -198,14 +198,16 @@ h3, .h3 {
 }
 
 .nav-logo {
-  font-size: 1.45rem;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  color: var(--navy);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
-.nav-logo span { color: var(--gold); }
+.nav-logo img {
+  height: 64px;
+  width: auto;
+  display: block;
+}
 
 .nav-links {
   display: flex;
@@ -1501,6 +1503,8 @@ textarea {
 
 @media (max-width: 768px) {
   :root { --nav-h: 64px; }
+
+  .nav-logo img { height: 46px; }
 
   .nav-links    { display: none; }
   .hamburger    { display: flex; }
