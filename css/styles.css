@@ -9,6 +9,8 @@
    CSS CUSTOM PROPERTIES
    ======================== */
 :root {
+  color-scheme: light dark;
+
   --white:       #FFFFFF;
   --navy:        #1A2F5E;
   --navy-800:    #243E72;
@@ -1577,4 +1579,205 @@ textarea {
   .pricing-card { padding: 36px 24px; }
 
   .about-content h1 { font-size: 2rem; }
+}
+
+/* ========================
+   DARK MODE
+   ======================== */
+
+@media (prefers-color-scheme: dark) {
+
+  /* ── Override core palette ── */
+  :root {
+    --white:    #0f1117;
+    --gray-50:  #141820;
+    --gray-100: #1a2030;
+    --gray-200: #252d3d;
+    --gray-400: #8892a4;
+    --gray-500: #9aa5b8;
+    --gray-700: #c8d0e0;
+    --gray-900: #e8edf5;
+    --navy:     #d4daf0;
+
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.30);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.35), 0 1px 2px rgba(0,0,0,0.25);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.25), 0 10px 24px rgba(0,0,0,0.30);
+    --shadow-lg: 0 10px 30px rgba(0,0,0,0.30), 0 30px 60px rgba(0,0,0,0.25);
+  }
+
+  /* ── Body & selection ── */
+  body {
+    background: #0f1117;
+    color: var(--gray-700);
+  }
+
+  ::selection {
+    background: var(--gold);
+    color: #0f1117;
+  }
+
+  /* ── Logo swap ── */
+  .nav-logo img { content: url('../images/logo-dark.svg'); }
+
+  /* ── Navigation ── */
+  .nav {
+    background: rgba(15, 17, 23, 0.88);
+    border-bottom-color: var(--gray-200);
+  }
+
+  .nav.scrolled {
+    border-bottom-color: var(--gray-200);
+  }
+
+  .hamburger span { background: var(--gray-700); }
+
+  /* ── Mobile menu ── */
+  .mobile-menu {
+    background: #141820;
+    border-bottom-color: var(--gray-200);
+  }
+
+  .mobile-menu a {
+    color: var(--gray-700);
+    border-bottom-color: var(--gray-200);
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    background: var(--gray-700);
+    color: #0f1117;
+    border-color: var(--gray-700);
+  }
+  .btn-primary:hover {
+    background: #e8edf5;
+    border-color: #e8edf5;
+  }
+
+  .btn-outline {
+    color: var(--gray-700);
+    border-color: var(--gray-200);
+  }
+  .btn-outline:hover {
+    background: var(--gray-700);
+    color: #0f1117;
+    border-color: var(--gray-700);
+  }
+
+  /* ── Sections with gray bg ── */
+  section[style*="background:var(--gray-50)"] {
+    background: var(--gray-50) !important;
+    border-top-color: var(--gray-200) !important;
+    border-bottom-color: var(--gray-200) !important;
+  }
+
+  /* ── Value props row ── */
+  .value-row {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+  .value-item { border-right-color: var(--gray-200); }
+  .value-item:hover { background: #1a2030; }
+
+  /* ── Industry tags ── */
+  .industry-tag {
+    background: #141820;
+    border-color: var(--gray-200);
+    color: var(--gray-700);
+  }
+
+  /* ── CTA Banner (keeps dark navy feel, just shifted) ── */
+  .cta-banner { background: #141e35; }
+
+  /* ── Page hero (inner pages) ── */
+  .page-hero { background: #0f1117; }
+
+  /* ── About ── */
+  .about-photo-frame {
+    background: linear-gradient(145deg, #1a2030 0%, #252d3d 100%);
+  }
+
+  .drives-block {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+  .drives-block p { color: var(--gray-700); }
+
+  /* ── Value cards ── */
+  .value-card {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+  .value-card:hover { border-color: rgba(106,174,214,0.35); }
+
+  /* ── Services ── */
+  .service-item {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+
+  /* ── Project cards ── */
+  .project-card {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+
+  /* ── Pricing ── */
+  .pricing-card:not(.featured) {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+  .pricing-card.featured {
+    background: #141e35;
+    border-color: #1e2d50;
+  }
+  .pricing-desc { border-bottom-color: var(--gray-200); }
+
+  .consult-prompt {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+
+  /* ── Forms ── */
+  .form-wrapper {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    background: #0f1117;
+    color: var(--gray-700);
+    border-color: var(--gray-200);
+  }
+
+  input::placeholder,
+  textarea::placeholder { color: var(--gray-400); }
+
+  label { color: var(--gray-700); }
+
+  .checkbox-label { color: var(--gray-700); }
+  .checkbox-label input[type="checkbox"] { accent-color: var(--gold); }
+
+  .form-success {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+
+  /* ── Contact blocks ── */
+  .contact-block {
+    background: #141820;
+    border-color: var(--gray-200);
+  }
+
+  /* ── Footer (already dark — just slightly deeper) ── */
+  .footer { background: #080c14; }
+
+  /* ── Coming soon ── */
+  .coming-soon { border-color: var(--gray-200); }
+
+  /* ── Mobile responsive border overrides ── */
+  .value-item { border-bottom-color: var(--gray-200); }
 }
