@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hollis Johnson — Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #22263a;
+      --border: #2e3354;
+      --accent: #6c63ff;
+      --accent2: #a78bfa;
+      --green: #34d399;
+      --text: #e2e8f0;
+      --muted: #8892b0;
+      --radius: 14px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+      gap: 28px;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding-bottom: 8px;
+    }
+    header .date {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent2), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p.tagline {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      width: 100%;
+      max-width: 620px;
+    }
+    .card h2 {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    /* ── Goals ── */
+    .goals-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .goal-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .goal-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent2);
+      width: 18px;
+      flex-shrink: 0;
+    }
+    .goal-input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .goal-input::placeholder { color: var(--muted); }
+    .goal-input:focus { border-color: var(--accent); }
+    .goal-checkbox {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .goal-input.done {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    .goals-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .btn {
+      padding: 9px 22px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      background: var(--surface2);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { color: var(--text); }
+
+    .save-status {
+      font-size: 0.8rem;
+      color: var(--green);
+      margin-top: 10px;
+      min-height: 18px;
+      transition: opacity 0.3s;
+    }
+
+    /* ── Income Tracker ── */
+    .income-display {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 14px;
+    }
+    .income-current {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+    }
+    .income-goal {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .progress-track {
+      background: var(--surface2);
+      border-radius: 99px;
+      height: 10px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      transition: width 0.5s ease;
+    }
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 8px;
+    }
+
+    .income-input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .income-input {
+      flex: 1;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .income-input::placeholder { color: var(--muted); }
+    .income-input:focus { border-color: var(--accent); }
+
+    /* ── Quote ── */
+    .quote-card {
+      text-align: center;
+      padding: 32px;
+    }
+    .quote-mark {
+      font-size: 3rem;
+      line-height: 0.5;
+      color: var(--accent);
+      opacity: 0.4;
+      font-family: Georgia, serif;
+    }
+    .quote-text {
+      font-size: 1.1rem;
+      color: var(--text);
+      line-height: 1.7;
+      font-style: italic;
+      margin: 18px 0 12px;
+    }
+    .quote-author {
+      font-size: 0.85rem;
+      color: var(--accent2);
+      font-weight: 600;
+    }
+    .quote-refresh {
+      margin-top: 16px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+      padding: 6px 16px;
+      border-radius: 99px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .quote-refresh:hover { color: var(--text); border-color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="date" id="date-display"></div>
+    <h1>Hollis Johnson</h1>
+    <p class="tagline">Let's make today count.</p>
+  </header>
+
+  <!-- Daily Goals -->
+  <section class="card" aria-label="Daily Goals">
+    <h2>Daily Goals</h2>
+    <div class="goals-list">
+      <div class="goal-item">
+        <span class="goal-number">1</span>
+        <input class="goal-input" type="text" id="goal1" placeholder="What's your first goal today?" />
+        <input class="goal-checkbox" type="checkbox" id="check1" title="Mark complete" />
+      </div>
+      <div class="goal-item">
+        <span class="goal-number">2</span>
+        <input class="goal-input" type="text" id="goal2" placeholder="Second goal…" />
+        <input class="goal-checkbox" type="checkbox" id="check2" title="Mark complete" />
+      </div>
+      <div class="goal-item">
+        <span class="goal-number">3</span>
+        <input class="goal-input" type="text" id="goal3" placeholder="Third goal…" />
+        <input class="goal-checkbox" type="checkbox" id="check3" title="Mark complete" />
+      </div>
+    </div>
+    <div class="goals-actions">
+      <button class="btn btn-primary" onclick="saveGoals()">Save Goals</button>
+      <button class="btn btn-ghost" onclick="clearGoals()">Clear All</button>
+    </div>
+    <div class="save-status" id="save-status"></div>
+  </section>
+
+  <!-- Income Tracker -->
+  <section class="card" aria-label="Income Tracker">
+    <h2>Monthly Income — April 2026</h2>
+    <div class="income-display">
+      <span class="income-current" id="income-display">$0</span>
+      <span class="income-goal">of $500 goal</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-labels">
+      <span>$0</span>
+      <span id="pct-label">0%</span>
+      <span>$500</span>
+    </div>
+    <div class="income-input-row">
+      <input class="income-input" type="number" id="income-input" min="0" max="9999" placeholder="Enter current income…" />
+      <button class="btn btn-primary" onclick="updateIncome()">Update</button>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="card quote-card" aria-label="Motivational Quote">
+    <div class="quote-mark">"</div>
+    <p class="quote-text" id="quote-text"></p>
+    <p class="quote-author" id="quote-author"></p>
+    <button class="quote-refresh" onclick="nextQuote()">New quote</button>
+  </section>
+
+  <script>
+    // ── Date ──────────────────────────────────────────────
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const now = new Date();
+    document.getElementById('date-display').textContent =
+      `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+
+    // ── Goals ─────────────────────────────────────────────
+    const TODAY = `goals_${now.toISOString().slice(0,10)}`;
+
+    function loadGoals() {
+      const saved = JSON.parse(localStorage.getItem(TODAY) || '{}');
+      [1,2,3].forEach(n => {
+        const input = document.getElementById(`goal${n}`);
+        const check = document.getElementById(`check${n}`);
+        input.value = saved[`goal${n}`] || '';
+        check.checked = saved[`check${n}`] || false;
+        input.classList.toggle('done', check.checked);
+      });
+    }
+
+    function saveGoals() {
+      const data = {};
+      [1,2,3].forEach(n => {
+        data[`goal${n}`] = document.getElementById(`goal${n}`).value;
+        data[`check${n}`] = document.getElementById(`check${n}`).checked;
+      });
+      localStorage.setItem(TODAY, JSON.stringify(data));
+      const status = document.getElementById('save-status');
+      status.textContent = 'Goals saved!';
+      setTimeout(() => { status.textContent = ''; }, 2200);
+    }
+
+    function clearGoals() {
+      [1,2,3].forEach(n => {
+        document.getElementById(`goal${n}`).value = '';
+        document.getElementById(`check${n}`).checked = false;
+        document.getElementById(`goal${n}`).classList.remove('done');
+      });
+      localStorage.removeItem(TODAY);
+    }
+
+    [1,2,3].forEach(n => {
+      document.getElementById(`check${n}`).addEventListener('change', function() {
+        document.getElementById(`goal${n}`).classList.toggle('done', this.checked);
+        saveGoals();
+      });
+    });
+
+    loadGoals();
+
+    // ── Income ────────────────────────────────────────────
+    const INCOME_KEY = `income_${now.toISOString().slice(0,7)}`;
+    const GOAL = 500;
+
+    function renderIncome(val) {
+      const pct = Math.min(100, Math.round((val / GOAL) * 100));
+      document.getElementById('income-display').textContent = `$${val.toLocaleString()}`;
+      document.getElementById('progress-fill').style.width = pct + '%';
+      document.getElementById('pct-label').textContent = pct + '%';
+    }
+
+    function updateIncome() {
+      const raw = parseFloat(document.getElementById('income-input').value);
+      if (isNaN(raw) || raw < 0) return;
+      localStorage.setItem(INCOME_KEY, raw);
+      renderIncome(raw);
+    }
+
+    const savedIncome = parseFloat(localStorage.getItem(INCOME_KEY) || '0');
+    document.getElementById('income-input').value = savedIncome || '';
+    renderIncome(savedIncome);
+
+    // ── Quotes ────────────────────────────────────────────
+    const quotes = [
+      { text: "The secret of getting ahead is getting started.", author: "Mark Twain" },
+      { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+      { text: "You don't have to be great to start, but you have to start to be great.", author: "Zig Ziglar" },
+      { text: "Success is the sum of small efforts, repeated day in and day out.", author: "Robert Collier" },
+      { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "The harder you work for something, the greater you'll feel when you achieve it.", author: "Unknown" },
+      { text: "Push yourself, because no one else is going to do it for you.", author: "Unknown" },
+      { text: "Great things never come from comfort zones.", author: "Unknown" },
+      { text: "Dream it. Wish it. Do it.", author: "Unknown" },
+    ];
+
+    let quoteIndex = parseInt(localStorage.getItem('quoteIndex') || '0');
+
+    function showQuote(idx) {
+      const q = quotes[idx % quotes.length];
+      document.getElementById('quote-text').textContent = q.text;
+      document.getElementById('quote-author').textContent = `— ${q.author}`;
+    }
+
+    function nextQuote() {
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      localStorage.setItem('quoteIndex', quoteIndex);
+      showQuote(quoteIndex);
+    }
+
+    showQuote(quoteIndex);
+  </script>
+</body>
+</html>
