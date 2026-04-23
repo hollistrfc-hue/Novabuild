@@ -680,7 +680,7 @@ h3, .h3 {
 }
 
 .cta-banner .eyebrow   { color: rgba(106,174,214,0.90); margin-bottom: 16px; }
-.cta-banner h2         { color: var(--white); margin-bottom: 18px; }
+.cta-banner h2         { color: #ffffff; margin-bottom: 18px; }
 .cta-banner .body-lg   {
   color: rgba(255,255,255,0.58);
   margin-bottom: 40px;
