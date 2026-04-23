@@ -1356,15 +1356,15 @@ textarea {
 }
 
 .footer-logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  color: var(--white);
   display: inline-block;
   margin-bottom: 12px;
 }
 
-.footer-logo span { color: var(--gold); }
+.footer-logo img {
+  height: 44px;
+  width: auto;
+  display: block;
+}
 
 .footer-tagline {
   font-size: 0.875rem;
