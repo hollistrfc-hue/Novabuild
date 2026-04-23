@@ -1730,6 +1730,19 @@ textarea {
     background: #141e35;
     border-color: #1e2d50;
   }
+  /* --white remaps to near-black in dark mode; restore legible colors on featured cards */
+  .pricing-card.featured .pricing-name,
+  .pricing-card.featured .pricing-price .amount { color: #eef1ff; }
+  .pricing-card.featured .pricing-price .currency { color: rgba(238,241,255,0.60); }
+  .pricing-card.featured .pricing-price .period { color: rgba(238,241,255,0.60); }
+  .pricing-card.featured .pricing-desc {
+    color: rgba(238,241,255,0.72);
+    border-bottom-color: rgba(238,241,255,0.12);
+  }
+  .pricing-card.featured .pricing-features li { color: rgba(238,241,255,0.88); }
+  .pricing-card.featured .pricing-tier { color: #6aaed6; }
+  .pricing-card.featured .feature-check { color: #6aaed6; }
+  .pricing-card.featured .btn.btn-gold { color: var(--navy-dark, #0a1628); }
   .pricing-desc { border-bottom-color: var(--gray-200); }
 
   .consult-prompt {
