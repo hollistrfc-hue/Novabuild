@@ -56,8 +56,24 @@
     }
   });
 
-  /* ─── Scroll-Triggered Fade Animations ─── */
-  const animEls = document.querySelectorAll('.fade-up, .fade-in');
+  /* ─── Hero Parallax ─── */
+  // Subtle background drift on scroll — Apple-style depth cue.
+  // Only runs on the home page hero; no-ops silently on other pages.
+  const heroBg = document.querySelector('.hero-bg');
+  if (heroBg) {
+    heroBg.style.willChange = 'transform';
+    function updateParallax() {
+      heroBg.style.transform = 'translateY(' + (window.scrollY * 0.18) + 'px)';
+    }
+    window.addEventListener('scroll', updateParallax, { passive: true });
+    updateParallax(); // set initial position
+  }
+
+  /* ─── Scroll-Triggered Animations ─── */
+  // Watches .fade-up (fade + rise), .fade-in (fade only), .reveal-scale (scale + fade).
+  // threshold 0.12 = triggers slightly before fully in view, matching Apple's feel.
+  // Elements are unobserved after becoming visible — they never re-animate.
+  const animEls = document.querySelectorAll('.fade-up, .fade-in, .reveal-scale');
 
   if (animEls.length) {
     const observer = new IntersectionObserver((entries) => {
@@ -68,8 +84,8 @@
         }
       });
     }, {
-      threshold: 0.08,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.12,
+      rootMargin: '0px 0px -32px 0px'
     });
 
     animEls.forEach(el => observer.observe(el));

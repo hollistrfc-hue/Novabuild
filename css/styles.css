@@ -44,9 +44,11 @@
   --r-xl:   28px;
   --r-full: 9999px;
 
-  --ease:      cubic-bezier(0.4, 0, 0.2, 1);
-  --trans:     0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ease:       cubic-bezier(0.4, 0, 0.2, 1);
+  --trans:      0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --trans-slow: 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Apple's signature easing — used for all scroll animations */
+  --apple-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* ========================
@@ -1437,27 +1439,69 @@ textarea {
 }
 
 /* ========================
-   ANIMATIONS
+   SCROLL ANIMATIONS
+   Apple-inspired: cubic-bezier(0.25,0.1,0.25,1), 0.7s–0.9s,
+   24px translateY max, GPU-accelerated with will-change.
+   Elements stay visible after animating in — no re-trigger.
    ======================== */
 
+/* ── Fade + rise (section headings, body copy, CTAs) ── */
 .fade-up {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.72s var(--ease), transform 0.72s var(--ease);
+  transform: translateY(24px);
+  transition: opacity 0.82s var(--apple-ease),
+              transform 0.82s var(--apple-ease);
+  will-change: transform;
 }
 
 .fade-up.visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
+/* ── Fade only (containers, rows) ── */
 .fade-in {
   opacity: 0;
-  transition: opacity 0.72s var(--ease);
+  transition: opacity 0.82s var(--apple-ease);
+  will-change: opacity;
 }
 
-.fade-in.visible { opacity: 1; }
+.fade-in.visible {
+  opacity: 1;
+  will-change: auto;
+}
 
+/* ── Scale reveal (images, photo frames, feature blocks) ── */
+/* Gentle 0.96 → 1.0 scale with simultaneous fade */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.96) translateY(12px);
+  transition: opacity 0.85s var(--apple-ease),
+              transform 0.85s var(--apple-ease);
+  will-change: transform;
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  will-change: auto;
+}
+
+/* ── Stat / bold callout wipe-in (pricing numbers) ── */
+/* Triggered by parent .fade-up becoming .visible — no extra observer needed */
+.reveal-stat {
+  opacity: 0;
+  transition: opacity 0.9s var(--apple-ease) 0.22s;
+  will-change: opacity;
+}
+
+.fade-up.visible .reveal-stat {
+  opacity: 1;
+  will-change: auto;
+}
+
+/* ── Stagger delays — 100ms apart (Apple-style card sequences) ── */
 .delay-1 { transition-delay: 0.10s; }
 .delay-2 { transition-delay: 0.20s; }
 .delay-3 { transition-delay: 0.30s; }
